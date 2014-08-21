@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MvcMovie.Models;
+using System.Net;
 
 namespace MvcMovie.Controllers
 {
@@ -23,9 +24,12 @@ namespace MvcMovie.Controllers
 
         //
         // GET: /Movies/Details/5
-
-        public ActionResult Details(int id = 0)
+        public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Movie movie = db.Movies.Find(id);
             if (movie == null)
             {
@@ -90,9 +94,12 @@ namespace MvcMovie.Controllers
 
         //
         // GET: /Movies/Delete/5
-
-        public ActionResult Delete(int id = 0)
+        public ActionResult Delete(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Movie movie = db.Movies.Find(id);
             if (movie == null)
             {
